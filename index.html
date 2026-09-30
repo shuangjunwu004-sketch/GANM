@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Global AI Nexus at Michigan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a network diagram hero (disciplines as nodes meeting at one hub), then a recruitment notice set like a posted bulletin, then mission, roles and timeline in a single readable column with side rails. */
+:root{
+  --bg:#F4F6FA;
+  --surface:#FFFFFF;
+  --ink:#0E1A33;
+  --muted:#4E5B74;
+  --line:#D8DEEA;
+  --accent:#F2B705;       /* maize-leaning amber */
+  --accent-ink:#0E1A33;   /* text on accent */
+  --blue:#1F3F7A;
+  --blue-soft:#E4EBF7;
+  --node:#1F3F7A;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1426; --surface:#121E36; --ink:#EEF2FA; --muted:#A5B1C8; --line:#26365A;
+    --accent:#F5C33B; --accent-ink:#0B1426; --blue:#9DB8F0; --blue-soft:#1A2A4A; --node:#9DB8F0;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1426; --surface:#121E36; --ink:#EEF2FA; --muted:#A5B1C8; --line:#26365A;
+  --accent:#F5C33B; --accent-ink:#0B1426; --blue:#9DB8F0; --blue-soft:#1A2A4A; --node:#9DB8F0;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.05rem;text-decoration:none;color:var(--ink)}
+.brand svg{flex:none}
+nav.links{display:flex;gap:20px;flex-wrap:wrap}
+nav.links a{font-size:.9rem;color:var(--muted);text-decoration:none;font-weight:500}
+nav.links a:hover{color:var(--ink)}
+nav.links a.cta{color:var(--accent-ink);background:var(--accent);padding:4px 12px;border-radius:999px}
+@media (max-width:640px){nav.links a:not(.cta){display:none}}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,80px) clamp(24px,4vw,40px)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.02;letter-spacing:-.02em;margin:.4em 0 .35em;text-wrap:balance}
+h1 .hub{background:linear-gradient(transparent 62%,var(--accent) 62%, var(--accent) 92%,transparent 92%);padding-inline:.05em}
+.lede{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.98rem;padding:12px 20px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;font-family:var(--body)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--blue)}
+.btn.ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn.ghost:hover{border-color:var(--ink)}
+.diagram{min-width:0}
+.diagram svg{width:100%;height:auto;display:block;max-width:460px;margin-inline:auto}
+.diagram text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.diagram .edge{stroke:var(--line);stroke-width:1.4}
+.diagram .pulse{stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:6 200;animation:flow 3.6s linear infinite}
+@keyframes flow{from{stroke-dashoffset:206}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){.diagram .pulse{animation:none;stroke-dasharray:none;opacity:.35}}
+.diagram .node{fill:var(--surface);stroke:var(--node);stroke-width:1.6}
+.diagram .hubc{fill:var(--accent)}
+.diagram .hubt{font-family:var(--display);font-weight:800;font-size:15px;fill:var(--accent-ink)}
+
+/* notice */
+.notice{margin-block:8px 0}
+.notice .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:22px 26px;position:relative;overflow:hidden}
+.notice .card::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:repeating-linear-gradient(-45deg,var(--accent) 0 8px,var(--ink) 8px 16px)}
+.notice .stamp{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid var(--ink);padding:6px 10px;border-radius:6px;white-space:nowrap;margin-left:8px}
+.notice h2{font-family:var(--display);font-size:1.35rem;margin:0 0 4px;line-height:1.2;text-wrap:balance}
+.notice p{margin:0;color:var(--muted)}
+.notice .text{min-width:0}
+@media (max-width:760px){.notice .card{grid-template-columns:1fr;gap:12px}.notice .stamp{justify-self:start}}
+
+/* sections */
+section.block{padding-block:clamp(48px,7vw,84px);border-top:1px solid var(--line)}
+section.block:first-of-type{border-top:0}
+.sec-head{display:grid;grid-template-columns:300px minmax(0,1fr);gap:32px;margin-bottom:32px}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr;gap:6px}}
+h2.sec{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sec-head p{margin:0;color:var(--muted);max-width:40em;font-size:1.05rem}
+
+.goals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+@media (max-width:700px){.goals{grid-template-columns:1fr}}
+.goal{background:var(--surface);padding:24px 24px 26px}
+.goal h3{font-family:var(--display);font-size:1.15rem;margin:0 0 6px}
+.goal p{margin:0;color:var(--muted)}
+
+.fields{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.chip{font-family:var(--mono);font-size:.82rem;padding:6px 12px;border-radius:999px;background:var(--blue-soft);color:var(--ink);border:1px solid var(--line)}
+.chip.core{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-weight:500}
+
+.activities{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+@media (max-width:860px){.activities{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.activities{grid-template-columns:1fr}}
+.act{border-top:2px solid var(--ink);padding-top:14px}
+.act h3{font-family:var(--display);font-size:1.08rem;margin:0 0 6px}
+.act p{margin:0;color:var(--muted);font-size:.95rem}
+
+/* recruitment */
+.roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:700px){.roles{grid-template-columns:1fr}}
+.role{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;display:grid;gap:4px;align-content:start}
+.role .kind{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.role h3{font-family:var(--display);font-size:1.1rem;margin:0}
+.role p{margin:0;color:var(--muted);font-size:.95rem}
+.subhead{font-family:var(--display);font-size:1.3rem;margin:44px 0 16px}
+
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.list{margin:0;padding-left:1.2em}
+.list li{margin-bottom:8px}
+.list li::marker{color:var(--blue)}
+
+.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+@media (max-width:860px){.timeline{grid-template-columns:1fr}}
+.timeline li{padding:18px 18px 20px;border-left:1px solid var(--line);display:grid;gap:4px;align-content:start}
+.timeline li:first-child{border-left:0}
+@media (max-width:860px){.timeline li{border-left:0;border-top:1px solid var(--line);grid-template-columns:auto 1fr;column-gap:14px}.timeline li:first-child{border-top:0}.timeline li .step{grid-row:span 3}}
+.timeline .step{font-family:var(--mono);font-size:.78rem;color:var(--accent-ink);background:var(--accent);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:500}
+.timeline .date{font-family:var(--mono);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.timeline .what{font-weight:600}
+
+.apply{margin-top:44px;background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:start}
+@media (max-width:760px){.apply{grid-template-columns:1fr}}
+.apply h3{font-family:var(--display);font-size:clamp(1.5rem,3vw,2rem);margin:0 0 10px;line-height:1.1}
+.apply p{margin:0 0 12px;opacity:.85}
+.apply ol{margin:0;padding-left:1.2em}
+.apply ol li{margin-bottom:10px}
+.apply .btn.primary{background:var(--accent);color:var(--accent-ink)}
+.apply .btn.primary:hover{filter:brightness(1.05)}
+.apply .btn[aria-disabled="true"]{opacity:.9;cursor:default}
+.apply .contact{margin-top:24px;padding-top:18px;border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent);display:grid;gap:8px}
+.apply .contact-label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.apply .contact-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.apply .contact-email{font-weight:600;font-size:1.05rem;user-select:all;overflow-wrap:anywhere;min-width:0}
+.apply .copy{font:500 .85rem var(--body);padding:5px 12px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.apply .copy:hover{background:var(--accent);color:var(--accent-ink)}
+footer .email{user-select:all;color:var(--ink);font-weight:600}
+
+footer{border-top:1px solid var(--line);padding-block:32px 40px;color:var(--muted);font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+footer p{margin:0;max-width:44em}
+</style>
+</head><body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Global AI Nexus at Michigan, home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.6" fill="none"><line x1="13" y1="13" x2="4" y2="5"/><line x1="13" y1="13" x2="22" y2="5"/><line x1="13" y1="13" x2="4" y2="21"/><line x1="13" y1="13" x2="22" y2="21"/></g>
+        <g fill="currentColor"><circle cx="4" cy="5" r="2.4"/><circle cx="22" cy="5" r="2.4"/><circle cx="4" cy="21" r="2.4"/><circle cx="22" cy="21" r="2.4"/></g>
+        <circle cx="13" cy="13" r="4.6" fill="var(--accent)"/>
+      </svg>
+      Global AI Nexus
+    </a>
+    <nav class="links" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#activities">What we do</a>
+      <a href="#recruiting">Recruiting</a>
+      <a class="cta" href="#apply">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Graduate student organization · University of Michigan, Ann Arbor</div>
+        <h1>Global AI <span class="hub">Nexus</span> at Michigan</h1>
+        <p class="lede">A student-led community where AI meets robotics, circuits, materials, education, healthcare and finance. We bring graduate students from every U-M school together to learn, build and connect with industry.</p>
+        <div class="actions">
+          <a class="btn primary" href="#recruiting">Join the founding team →</a>
+          <a class="btn ghost" href="#about">Our mission</a>
+        </div>
+      </div>
+      <div class="diagram" aria-hidden="true">
+        <svg viewBox="0 0 440 380" role="img">
+          <g id="edges"></g>
+          <g id="pulses"></g>
+          <g id="nodes"></g>
+          <circle class="hubc" cx="220" cy="190" r="44"/>
+          <text class="hubt" x="220" y="195" text-anchor="middle">AI</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice wrap" aria-labelledby="notice-title">
+    <div class="card">
+      <span class="stamp">Now recruiting</span>
+      <div class="text">
+        <h2 id="notice-title">Fall 2026: we're building our first Executive Board</h2>
+        <p>We're a new organization looking for founding officers and team members. Every discipline is welcome, and no prior AI experience is required. Applications close <strong id="deadline-inline">Friday, October 16</strong>.</p>
+      </div>
+      <a class="btn primary" href="#recruiting">See open roles</a>
+    </div>
+  </div>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec">Our mission</h2>
+        <p>Global AI Nexus at Michigan explores and advances artificial intelligence and its interdisciplinary applications. We connect students across schools, and we connect the university with industry.</p>
+      </div>
+      <div class="goals">
+        <div class="goal">
+          <h3>Cross-disciplinary collaboration</h3>
+          <p>We bring together students from the College of Engineering, LSA, the Ross School of Business, and every other U-M school and college.</p>
+        </div>
+        <div class="goal">
+          <h3>Innovation with hard tech</h3>
+          <p>We pair AI with emerging and hard technologies to create research, educational and entrepreneurial opportunities for students.</p>
+        </div>
+        <div class="goal">
+          <h3>Academia meets industry</h3>
+          <p>Speaker events, workshops, knowledge sharing and professional networking, all designed around students.</p>
+        </div>
+        <div class="goal">
+          <h3>A global community</h3>
+          <p>An inclusive, open community that values diversity, authenticity and collaboration across academic, professional and cultural backgrounds.</p>
+        </div>
+      </div>
+      <div class="fields" aria-label="Focus areas">
+        <span class="chip core">Artificial Intelligence</span>
+        <span class="chip">Robotics</span>
+        <span class="chip">Electronics</span>
+        <span class="chip">Integrated circuits</span>
+        <span class="chip">Materials science</span>
+        <span class="chip">Education</span>
+        <span class="chip">Healthcare</span>
+        <span class="chip">Finance</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="activities">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec">What we do</h2>
+        <p>Members join at least one event, meeting or team project each semester. Here is what that looks like.</p>
+      </div>
+      <div class="activities">
+        <div class="act"><h3>Talks & panels</h3><p>Invited speakers from research labs and industry on where AI is heading.</p></div>
+        <div class="act"><h3>Workshops</h3><p>Hands-on sessions on tools and methods, open to beginners and experts alike.</p></div>
+        <div class="act"><h3>Student projects</h3><p>Interdisciplinary teams working on AI agents, robotics, AI in education and more.</p></div>
+        <div class="act"><h3>Networking</h3><p>Connections with U-M faculty, mentors, student groups and partner organizations.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="recruiting">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec">Recruitment notice</h2>
+        <p>As a founding member you'll shape the organization from day one: its first events, its partnerships and its culture. Officers serve a one-year term.</p>
+      </div>
+
+      <h3 class="subhead">Open roles</h3>
+      <div class="roles">
+        <div class="role"><span class="kind">Officer</span><h3>Vice President</h3><p>Runs daily operations with the President, supervises team execution and leads member onboarding.</p></div>
+        <div class="role"><span class="kind">Officer</span><h3>General Secretary</h3><p>Keeps meeting minutes and records, manages official channels and organizes internal meetings.</p></div>
+        <div class="role"><span class="kind">Officer</span><h3>Treasurer</h3><p>Manages the budget, reimbursements and funding requests in line with University policy.</p></div>
+        <div class="role"><span class="kind">Team</span><h3>Research & Tech</h3><p>Plans AI talks, workshops and research-sharing sessions, and builds collaborations with U-M labs.</p></div>
+        <div class="role"><span class="kind">Team</span><h3>Partnerships & Outreach</h3><p>Brings in speakers, mentors and partner organizations, and supports sponsorships.</p></div>
+        <div class="role"><span class="kind">Team</span><h3>Media & Communications</h3><p>Creates event materials, runs our social media and shapes our visual identity.</p></div>
+        <div class="role"><span class="kind">Team</span><h3>Events & Operations</h3><p>Plans events and handles logistics, registration, attendance and post-event feedback.</p></div>
+        <div class="role"><span class="kind">Team</span><h3>HR & Membership</h3><p>Leads recruitment, onboarding and team-building, and keeps membership records.</p></div>
+      </div>
+
+      <div class="two" style="margin-top:44px">
+        <div>
+          <h3 class="subhead" style="margin-top:0">Who can apply</h3>
+          <ul class="list">
+            <li>Currently enrolled <strong>University of Michigan graduate students</strong> (master's and PhD)</li>
+            <li>Any school, department or program</li>
+            <li>Any nationality or cultural background</li>
+            <li>No prior AI experience needed, just curiosity and commitment</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="subhead" style="margin-top:0">What you'll gain</h3>
+          <ul class="list">
+            <li>Leadership experience in a new organization</li>
+            <li>Direct contact with speakers, faculty and industry partners</li>
+            <li>Interdisciplinary project experience</li>
+            <li>A community of peers from across campus and around the world</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="subhead">Timeline</h3>
+      <ol class="timeline">
+        <li><span class="step">1</span><span class="date">Oct 1</span><span class="what">Applications open</span></li>
+        <li><span class="step">2</span><span class="date">Oct 16</span><span class="what">Application deadline</span></li>
+        <li><span class="step">3</span><span class="date">Oct 19 – 23</span><span class="what">Coffee chats</span></li>
+        <li><span class="step">4</span><span class="date">Oct 26</span><span class="what">Results announced</span></li>
+        <li><span class="step">5</span><span class="date">Early Nov</span><span class="what">First General Body Meeting</span></li>
+      </ol>
+
+      <div class="apply" id="apply">
+        <div>
+          <h3>How to apply</h3>
+          <ol>
+            <li>Fill out the application form with your name, program and the roles you're interested in.</li>
+            <li>Include a short statement of intent (150–250 words): why you want to join and what you'd like to build.</li>
+            <li>Meet us for a 15-minute coffee chat.</li>
+          </ol>
+        </div>
+        <div>
+          <p>Applications are reviewed on a rolling basis, so apply early.</p>
+          <a class="btn primary" id="apply-btn" href="#apply" aria-disabled="true">Application form opens Oct 1</a>
+          <div class="contact">
+            <span class="contact-label">Questions? Contact the founder</span>
+            <div class="contact-row">
+              <span class="contact-email" id="contact-email">shuangjunwu004@gmail.com</span>
+              <button type="button" class="copy" id="copy-email">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Global AI Nexus at Michigan</strong> is a student organization at the University of Michigan. This site is run by students and is not an official University of Michigan website.</p>
+    <p>Contact: <span class="email">shuangjunwu004@gmail.com</span><br>Open to all eligible U-M students in accordance with the University's non-discrimination policies.</p>
+  </div>
+</footer>
+
+<script>
+// Edit these when the details are ready
+const APPLY_URL = ""; // e.g. a Google Form link
+
+(function(){
+  const btn = document.getElementById("apply-btn");
+  if (APPLY_URL) {
+    btn.href = APPLY_URL; btn.target = "_blank"; btn.rel = "noopener";
+    btn.removeAttribute("aria-disabled"); btn.textContent = "Open the application form →";
+  } else {
+    btn.addEventListener("click", e => e.preventDefault());
+  }
+
+  // Copy contact email
+  const copyBtn = document.getElementById("copy-email");
+  copyBtn.addEventListener("click", async () => {
+    const text = document.getElementById("contact-email").textContent.trim();
+    try { await navigator.clipboard.writeText(text); copyBtn.textContent = "Copied"; }
+    catch (e) {
+      const r = document.createRange(); r.selectNodeContents(document.getElementById("contact-email"));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = "Selected";
+    }
+    setTimeout(() => copyBtn.textContent = "Copy", 1800);
+  });
+
+  // Network diagram: disciplines around the AI hub
+  const NS = "http://www.w3.org/2000/svg";
+  const cx = 220, cy = 190;
+  const fields = ["Robotics","Electronics","Circuits","Materials","Education","Healthcare","Finance"];
+  const R = 140;
+  const pts = fields.map((f,i)=>{
+    const a = -Math.PI/2 + i*2*Math.PI/fields.length;
+    return {f, x: cx + R*Math.cos(a), y: cy + R*0.92*Math.sin(a)};
+  });
+  const E = document.getElementById("edges"), P = document.getElementById("pulses"), N = document.getElementById("nodes");
+  const mk = (tag, attrs) => { const el = document.createElementNS(NS, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); return el; };
+  // ring edges between neighbours
+  pts.forEach((p,i)=>{ const q = pts[(i+1)%pts.length]; E.appendChild(mk("line",{x1:p.x,y1:p.y,x2:q.x,y2:q.y,class:"edge","stroke-dasharray":"3 5"})); });
+  pts.forEach((p,i)=>{
+    E.appendChild(mk("line",{x1:cx,y1:cy,x2:p.x,y2:p.y,class:"edge"}));
+    const pulse = mk("line",{x1:p.x,y1:p.y,x2:cx,y2:cy,class:"pulse"});
+    pulse.style.animationDelay = (-i*0.51)+"s";
+    P.appendChild(pulse);
+    N.appendChild(mk("circle",{cx:p.x,cy:p.y,r:9,class:"node"}));
+    const below = p.y > cy + 10, above = p.y < cy - 10;
+    const t = mk("text",{x:p.x, y: above ? p.y-16 : below ? p.y+24 : p.y+4, "text-anchor": Math.abs(p.x-cx)<30 ? "middle" : (p.x>cx ? "start":"end")});
+    if (Math.abs(p.x-cx)>=30 && !above && !below) t.setAttribute("x", p.x + (p.x>cx?16:-16));
+    t.textContent = p.f;
+    N.appendChild(t);
+  });
+})();
+</script>
+</body></html>
