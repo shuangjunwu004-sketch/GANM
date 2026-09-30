@@ -147,17 +147,20 @@ h2.sec{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,3.4vw,2
 .apply .btn.primary{background:var(--accent);color:var(--accent-ink)}
 .apply .btn.primary:hover{filter:brightness(1.05)}
 .apply .btn[aria-disabled="true"]{opacity:.9;cursor:default}
-.apply .contact{margin-top:24px;padding-top:18px;border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent);display:grid;gap:8px}
-.apply .contact-label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
-.apply .contact-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.apply .contact-email{font-weight:600;font-size:1.05rem;user-select:all;overflow-wrap:anywhere;min-width:0}
-.apply .copy{font:500 .85rem var(--body);padding:5px 12px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+
+/* contact group */
+.apply .contact{margin-top:24px;padding-top:18px;border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent);display:grid;gap:12px}
+.apply .contact-label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin-bottom:2px}
+.apply .contact-list{display:grid;gap:8px}
+.apply .contact-row{display:flex;align-items:center;justify-content:space-between;gap:8px;background:color-mix(in srgb,var(--bg) 8%,transparent);padding:6px 12px;border-radius:6px}
+.apply .contact-email{font-weight:500;font-size:.92rem;user-select:all;overflow-wrap:anywhere;min-width:0;font-family:var(--mono)}
+.apply .copy{font:500 .78rem var(--body);padding:3px 10px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;flex-shrink:0}
 .apply .copy:hover{background:var(--accent);color:var(--accent-ink)}
-footer .email{user-select:all;color:var(--ink);font-weight:600}
 
 footer{border-top:1px solid var(--line);padding-block:32px 40px;color:var(--muted);font-size:.88rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
 footer p{margin:0;max-width:44em}
+footer .email-list{user-select:all;color:var(--ink);font-weight:500;font-family:var(--mono);display:inline-block;margin-top:4px}
 </style>
 </head><body>
 
@@ -317,22 +320,55 @@ footer p{margin:0;max-width:44em}
       </ol>
 
       <div class="apply" id="apply">
+        <!-- 左侧列：申请指引与价值观说明 -->
         <div>
           <h3>How to apply</h3>
           <ol>
-            <li>Fill out the application form with your name, program and the roles you're interested in.</li>
-            <li>Include a short statement of intent (150–250 words): why you want to join and what you'd like to build.</li>
-            <li>Meet us for a 15-minute coffee chat.</li>
+            <li>
+              <strong>Complete the online form:</strong> Provide your basic background, academic program, and indicate up to two roles you are most excited about.
+            </li>
+            <li>
+              <strong>Share your statement of intent:</strong> In 150–250 words, tell us why you want to join GAAM, your interests in AI or interdisciplinary tech, and what initiatives you would like to initiate.
+            </li>
+            <li>
+              <strong>Casual coffee chat:</strong> Selected applicants will be invited for a 15-minute informal conversation to discuss mutual fit, team culture, and ideas for the upcoming year.
+            </li>
           </ol>
+
+          <div style="margin-top: 20px; padding: 14px 16px; background: color-mix(in srgb, var(--bg) 6%, transparent); border: 1px solid color-mix(in srgb, var(--bg) 15%, transparent); border-radius: 8px; font-size: 0.88rem; line-height: 1.55;">
+            <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; font-weight: 500;">
+              What we value
+            </div>
+            <p style="margin: 0; opacity: 0.9;">
+              We look for curiosity, proactive ownership, and a collaborative mindset. No prior deep learning or engineering background is required for operational or community roles.
+            </p>
+          </div>
         </div>
+
+        <!-- 右侧列：申请按钮与 4 位联系人列表 -->
         <div>
-          <p>Applications are reviewed on a rolling basis, so apply early.</p>
-          <a class="btn primary" id="apply-btn" href="#apply" aria-disabled="true">Application form opens Oct 1</a>
+          <p style="margin: 0 0 16px; opacity: .85;">Applications are reviewed on a rolling basis, so apply early.</p>
+          <a class="btn primary" id="apply-btn" href="#apply" aria-disabled="true" style="display: inline-flex; width: 100%; justify-content: center;">Application form opens Oct 1</a>
+          
           <div class="contact">
-            <span class="contact-label">Questions? Contact the founder</span>
-            <div class="contact-row">
-              <span class="contact-email" id="contact-email">shuangjunwu004@gmail.com</span>
-              <button type="button" class="copy" id="copy-email">Copy</button>
+            <span class="contact-label">Questions? Contact the founding team</span>
+            <div class="contact-list">
+              <div class="contact-row">
+                <span class="contact-email">shuangjw@umich.edu</span>
+                <button type="button" class="copy">Copy</button>
+              </div>
+              <div class="contact-row">
+                <span class="contact-email">xunzhang@umich.edu</span>
+                <button type="button" class="copy">Copy</button>
+              </div>
+              <div class="contact-row">
+                <span class="contact-email">shuxianw@umich.edu</span>
+                <button type="button" class="copy">Copy</button>
+              </div>
+              <div class="contact-row">
+                <span class="contact-email">huizew@umich.edu</span>
+                <button type="button" class="copy">Copy</button>
+              </div>
             </div>
           </div>
         </div>
@@ -344,13 +380,13 @@ footer p{margin:0;max-width:44em}
 <footer>
   <div class="wrap">
     <p><strong>Global AI Alliance at Umich</strong> is a student organization at the University of Michigan. This site is run by students and is not an official University of Michigan website.</p>
-    <p>Contact: <span class="email">shuangjunwu004@gmail.com</span><br>Open to all eligible U-M students in accordance with the University's non-discrimination policies.</p>
+    <p>Founding Team Contacts:<br><span class="email-list">shuangjw@umich.edu · xunzhang@umich.edu · shuxianw@umich.edu · huizew@umich.edu</span><br>Open to all eligible U-M students in accordance with the University's non-discrimination policies.</p>
   </div>
 </footer>
 
 <script>
 // Edit these when the details are ready
-const APPLY_URL = ""; // e.g. a Google Form link
+const APPLY_URL = ""; // e.g. a Google Form link or apply.html
 
 (function(){
   const btn = document.getElementById("apply-btn");
@@ -361,16 +397,24 @@ const APPLY_URL = ""; // e.g. a Google Form link
     btn.addEventListener("click", e => e.preventDefault());
   }
 
-  // Copy contact email
-  const copyBtn = document.getElementById("copy-email");
-  copyBtn.addEventListener("click", async () => {
-    const text = document.getElementById("contact-email").textContent.trim();
-    try { await navigator.clipboard.writeText(text); copyBtn.textContent = "Copied"; }
-    catch (e) {
-      const r = document.createRange(); r.selectNodeContents(document.getElementById("contact-email"));
-      const s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = "Selected";
-    }
-    setTimeout(() => copyBtn.textContent = "Copy", 1800);
+  // Copy contact emails for each founding member
+  document.querySelectorAll(".contact-row .copy").forEach(copyBtn => {
+    copyBtn.addEventListener("click", async () => {
+      const emailEl = copyBtn.closest(".contact-row").querySelector(".contact-email");
+      const text = emailEl.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = "Copied";
+      } catch (e) {
+        const r = document.createRange();
+        r.selectNodeContents(emailEl);
+        const s = getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+        copyBtn.textContent = "Selected";
+      }
+      setTimeout(() => copyBtn.textContent = "Copy", 1800);
+    });
   });
 
   // Network diagram: disciplines around the AI hub
