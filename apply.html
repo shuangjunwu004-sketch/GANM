@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Application Form · Global AI Alliance at Umich</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B1426'/%3E%3Cpath d='M16 5 L26 23 L21 23 L16 13 L11 23 L6 23 Z' fill='%23F5C33B'/%3E%3Ccircle cx='16' cy='5' r='2.5' fill='%23F5C33B'/%3E%3Ccircle cx='6' cy='23' r='2.2' fill='%239DB8F0'/%3E%3Ccircle cx='26' cy='23' r='2.2' fill='%239DB8F0'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #F4F6FA;
+      --card-bg: #FFFFFF;
+      --ink: #0E1A33;
+      --muted: #5C6A85;
+      --line: #E2E8F0;
+      --input-bg: #F8FAFC;
+      --input-border: #D1D9E7;
+      --accent: #F2B705;
+      --blue: #1F3F7A;
+      --req: #E11D48;
+      --confirm-bg: #E9EEF8;
+      --radius: 12px;
+      --font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      padding: clamp(24px, 4vw, 54px) 16px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .back-nav {
+      margin-bottom: 24px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .form-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 28px rgba(14, 26, 51, 0.04);
+      padding: clamp(32px, 5vw, 64px);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 4vw, 2.6rem);
+      font-weight: 800;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 36px;
+    }
+    .subtitle .req-star {
+      color: var(--req);
+    }
+
+    .sec-title {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      margin: 40px 0 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+    @media (max-width: 680px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    label {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    label .req {
+      color: var(--req);
+      margin-left: 2px;
+    }
+    label .hint {
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-left: 4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1.5px solid var(--input-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      color: var(--ink);
+      outline: none;
+      transition: all 0.15s ease;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #94A3B8;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3.5px rgba(31, 63, 122, 0.1);
+    }
+
+    .helper {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* POSITIONS 复选框网格 */
+    .roles-checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 28px;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 680px) {
+      .roles-checkbox-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+    .check-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.96rem;
+      font-weight: 500;
+      color: var(--ink);
+      user-select: none;
+    }
+    .check-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      border: 1.5px solid var(--input-border);
+      border-radius: 4px;
+      cursor: pointer;
+      accent-color: var(--blue);
+    }
+
+    /* 字数计数器 */
+    .word-count {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* 身份确认卡片 */
+    .confirm-card {
+      margin-top: 32px;
+      margin-bottom: 28px;
+      background: var(--confirm-bg);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .confirm-card input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      margin: 0;
+      cursor: pointer;
+      accent-color: var(--blue);
+      flex-shrink: 0;
+    }
+    .confirm-card span {
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* 提交按钮 */
+    .btn-submit {
+      background: #0E1A33;
+      color: #FFFFFF;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .btn-submit:hover {
+      background: #1F3F7A;
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="back-nav">
+    <a href="index.html" class="back-link">← Back to Global AI Alliance</a>
+  </div>
+
+  <div class="form-card">
+    <h1>Application form</h1>
+    <p class="subtitle">Fall 2026 founding team · takes about 10 minutes · fields marked <span class="req-star">*</span> are required</p>
+
+    <!-- Netlify 表单收集支持 -->
+    <form name="gaam-board-application" method="POST" data-netlify="true" action="/#apply">
+      <input type="hidden" name="form-name" value="gaam-board-application">
+
+      <!-- ABOUT YOU -->
+      <div class="sec-title">ABOUT YOU</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Full name <span class="req">*</span></label>
+          <input type="text" name="full_name" placeholder="" required>
+        </div>
+        <div class="field">
+          <label>Preferred name</label>
+          <input type="text" name="preferred_name" placeholder="Optional">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Gender <span class="req">*</span></label>
+          <select name="gender" required>
+            <option value="" disabled selected>Select...</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Non-binary">Non-binary</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ACADEMIC PROGRAM -->
+      <div class="sec-title">ACADEMIC PROGRAM</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Program name <span class="req">*</span></label>
+          <input type="text" name="program_name" placeholder="e.g. MS in Applied Statistics" required>
+        </div>
+        <div class="field">
+          <label>Degree level <span class="req">*</span></label>
+          <select name="degree_level" required>
+            <option value="" disabled selected>Select...</option>
+            <option value="Master's">Master's</option>
+            <option value="PhD">PhD</option>
+            <option value="Undergraduate">Undergraduate</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>School or college <span class="req">*</span></label>
+          <select name="school_college" required>
+            <option value="" disabled selected>Select...</option>
+            <option value="College of Engineering">College of Engineering</option>
+            <option value="College of Literature, Science, and the Arts (LSA)">College of Literature, Science, and the Arts (LSA)</option>
+            <option value="Stephen M. Ross School of Business">Stephen M. Ross School of Business</option>
+            <option value="School of Information (UMSI)">School of Information (UMSI)</option>
+            <option value="Medical School / Healthcare">Medical School / Healthcare</option>
+            <option value="Other">Other U-M School / College</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Expected graduation <span class="req">*</span></label>
+          <input type="text" name="expected_graduation" placeholder="e.g. May 2027" required>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="sec-title">CONTACT</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>U-M email <span class="req">*</span></label>
+          <input type="email" name="umich_email" placeholder="uniqname@umich.edu" pattern=".+@umich\.edu" required>
+          <span class="helper">Must end in @umich.edu</span>
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input type="tel" name="phone" placeholder="Optional">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>WeChat / other contact</label>
+          <input type="text" name="wechat_contact" placeholder="Optional">
+        </div>
+        <div class="field">
+          <label>LinkedIn or portfolio</label>
+          <input type="text" name="linkedin_portfolio" placeholder="https://... (optional)">
+        </div>
+      </div>
+
+      <!-- POSITIONS -->
+      <div class="sec-title">POSITIONS</div>
+      <div class="field">
+        <label>Which roles are you applying for? <span class="req">*</span> <span class="hint">Choose one or more</span></label>
+        <div class="roles-checkbox-grid">
+          <label class="check-label"><input type="checkbox" name="roles" value="Vice President"> Vice President</label>
+          <label class="check-label"><input type="checkbox" name="roles" value="General Secretary"> General Secretary</label>
+          <label class="check-label"><input type="checkbox" name="roles" value="Treasurer"> Treasurer</label>
+          <label class="check-label"><input type="checkbox" name="roles" value="Research & Tech Team"> Research & Tech Team</label>
+          <label class="check-label"><input type="checkbox" name="roles" value="Partnerships & Outreach Team"> Partnerships & Outreach Team</label>
+          <label class="check-label"><input type="checkbox" name="roles" value="Media & Communications Team"> Media & Communications Team</label>
+          <label class="check-label"><input type="checkbox" name="roles" value="Events & Operations Team"> Events & Operations Team</label>
+          <label class="check-label"><input type="checkbox" name="roles" value="HR & Membership Team"> HR & Membership Team</label>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>First choice <span class="req">*</span></label>
+          <select name="first_choice" id="first-choice-select" required>
+            <option value="" disabled selected>Choose from the roles you ticked...</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Hours per week you can commit <span class="req">*</span></label>
+          <select name="hours_commit" required>
+            <option value="" disabled selected>Select...</option>
+            <option value="3-5 hours">3–5 hours / week</option>
+            <option value="5-8 hours">5–8 hours / week</option>
+            <option value="8-12 hours">8–12 hours / week</option>
+            <option value="12+ hours">12+ hours / week</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- TELL US ABOUT YOURSELF -->
+      <div class="sec-title">TELL US ABOUT YOURSELF</div>
+      <div class="field" style="margin-bottom: 24px;">
+        <label>Statement of intent <span class="req">*</span> <span class="hint">150–250 words: why you want to join and what you'd like to build</span></label>
+        <textarea name="statement_of_intent" id="statement-intent" rows="6" required></textarea>
+        <div class="word-count" id="word-count-display">0 words</div>
+      </div>
+
+      <div class="field" style="margin-bottom: 24px;">
+        <label>Relevant experience or skills</label>
+        <textarea name="relevant_experience" rows="4" placeholder="Optional: projects, research, leadership, design, events, coding..."></textarea>
+      </div>
+
+      <div class="field" style="margin-bottom: 24px;">
+        <label>How did you hear about us?</label>
+        <select name="hear_about_us">
+          <option value="" selected>Select... (optional)</option>
+          <option value="WeChat Group / Moment">WeChat Group / Moment</option>
+          <option value="Instagram / Social Media">Instagram / Social Media</option>
+          <option value="UMich Email / Newsletter">UMich Email / Newsletter</option>
+          <option value="Friend / Word of Mouth">Friend / Word of Mouth</option>
+          <option value="Flyer on Campus">Flyer on Campus</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- 确认信息卡片 -->
+      <label class="confirm-card">
+        <input type="checkbox" name="enrolled_confirm" required>
+        <span>I confirm I am a currently enrolled University of Michigan graduate student.</span>
+      </label>
+
+      <!-- 提交按钮 -->
+      <button type="submit" class="btn-submit">Submit application</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // 1. 动态联动：复选框勾选的岗位自动填入 First choice 下拉框
+  const checkboxes = document.querySelectorAll('input[name="roles"]');
+  const firstChoiceSelect = document.getElementById('first-choice-select');
+
+  function updateFirstChoice() {
+    const selectedRoles = Array.from(checkboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+
+    const prevValue = firstChoiceSelect.value;
+    firstChoiceSelect.innerHTML = '<option value="" disabled selected>Choose from the roles you ticked...</option>';
+
+    if (selectedRoles.length === 0) {
+      firstChoiceSelect.disabled = true;
+    } else {
+      firstChoiceSelect.disabled = false;
+      selectedRoles.forEach(role => {
+        const opt = document.createElement('option');
+        opt.value = role;
+        opt.textContent = role;
+        if (role === prevValue) opt.selected = true;
+        firstChoiceSelect.appendChild(opt);
+      });
+    }
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', updateFirstChoice));
+  updateFirstChoice();
+
+  // 2. 实时字数统计 (Word Counter)
+  const statementTextarea = document.getElementById('statement-intent');
+  const wordCountDisplay = document.getElementById('word-count-display');
+
+  statementTextarea.addEventListener('input', () => {
+    const text = statementTextarea.value.trim();
+    const words = text ? text.split(/\s+/).length : 0;
+    wordCountDisplay.textContent = `${words} words`;
+  });
+</script>
+
+</body>
+</html>

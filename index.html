@@ -176,42 +176,6 @@ h2.sec{font-family:var(--display);font-weight:700;font-size:clamp(1.75rem,3.4vw,
 .apply .copy{font:500 .78rem var(--body);padding:3px 10px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;flex-shrink:0;transition:all .18s ease}
 .apply .copy:hover{background:var(--accent);color:var(--accent-ink)}
 
-/* application form */
-#application{scroll-margin-top:84px}
-.appform{margin-top:32px;background:var(--surface-glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,36px);display:grid;gap:28px}
-.form-head h3{font-family:var(--display);font-size:clamp(1.4rem,3vw,1.8rem);margin:0 0 4px}
-.form-head p{margin:0;color:var(--muted);font-size:.95rem}
-.appform fieldset{border:0;margin:0;padding:0;display:grid;gap:16px;min-width:0}
-.appform legend{font-family:var(--mono);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0 0 10px;border-bottom:1px solid var(--line);width:100%;margin-bottom:14px}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px}
-@media (max-width:640px){.grid2{grid-template-columns:1fr}}
-.field{display:grid;gap:6px;min-width:0;align-content:start}
-.field label,.field .label{font-weight:600;font-size:.94rem}
-.req{color:#FB923C}
-.hint{font-weight:400;color:var(--muted);font-size:.85rem}
-.appform input:not([type=checkbox]),.appform select,.appform textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;width:100%;min-width:0}
-.appform textarea{resize:vertical;line-height:1.5}
-.appform input:focus,.appform select:focus,.appform textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
-.appform [aria-invalid="true"]{border-color:#FB923C !important}
-.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 20px;margin-top:4px}
-@media (max-width:640px){.checks{grid-template-columns:1fr}}
-.checks label,.confirm{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.97rem;cursor:pointer}
-.checks input,.confirm input{width:18px;height:18px;margin-top:3px;accent-color:var(--blue);flex:none}
-.confirm{padding:14px 16px;background:var(--blue-soft);border-radius:8px}
-.count{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.count.ok{color:var(--blue)}
-.err{color:#FB923C;font-size:.88rem}
-.submit-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
-.appform .btn.primary{background:var(--accent);color:var(--accent-ink);border:0;font-size:1rem;font-weight:700}
-.appform select option{background:var(--surface);color:var(--ink)}
-.appform .btn.primary:disabled{opacity:.6;cursor:progress}
-.status{color:var(--muted);font-size:.94rem}
-.status.bad{color:#FB923C}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.thanks{margin-top:32px;background:var(--surface-glass);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);padding:28px}
-.thanks h3{font-family:var(--display);font-size:1.6rem;margin:0 0 8px}
-.thanks p{margin:0;color:var(--muted)}
-
 footer{border-top:1px solid var(--line);padding-block:36px 44px;color:var(--muted);font-size:.88rem;background:rgba(11,20,38,0.7)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
 footer p{margin:0;max-width:44em}
@@ -414,7 +378,7 @@ footer .email-list{user-select:all;color:var(--blue);font-weight:500;font-family
         <!-- 右侧列：申请按钮与 4 位联系人列表 -->
         <div>
           <p style="margin: 0 0 16px; opacity: .85;">Applications are reviewed on a rolling basis, so apply early.</p>
-          <a class="btn primary" id="apply-btn" href="#application" style="display: inline-flex; width: 100%; justify-content: center;">Start your application ↓</a>
+          <a class="btn primary" id="apply-btn" href="#apply" aria-disabled="true" style="display: inline-flex; width: 100%; justify-content: center;">Application form opens Oct 1</a>
           
           <div class="contact">
             <span class="contact-label">Questions? Contact the founding team</span>
@@ -439,96 +403,6 @@ footer .email-list{user-select:all;color:var(--blue);font-weight:500;font-family
           </div>
         </div>
       </div>
-      <form class="appform" id="application" name="application" method="POST" action="/" data-netlify="true" netlify-honeypot="company_website" enctype="multipart/form-data" novalidate>
-        <input type="hidden" name="form-name" value="application">
-        <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
-        <div class="form-head">
-          <h3>Application form</h3>
-          <p>Fall 2026 founding team · takes about 10 minutes · fields marked <span class="req">*</span> are required</p>
-        </div>
-
-        <fieldset>
-          <legend>About you</legend>
-          <div class="grid2">
-            <div class="field"><label for="f-name">Full name <span class="req">*</span></label><input id="f-name" name="full_name" autocomplete="name" required></div>
-            <div class="field"><label for="f-pref">Preferred name</label><input id="f-pref" name="preferred_name" placeholder="Optional"></div>
-            <div class="field"><label for="f-gender">Gender <span class="req">*</span></label>
-              <select id="f-gender" name="gender" required>
-                <option value="">Select…</option><option>Female</option><option>Male</option><option>Non-binary</option><option>Prefer to self-describe</option><option>Prefer not to say</option>
-              </select></div>
-            <div class="field" id="gender-self-wrap" hidden><label for="f-gender-self">Self-description</label><input id="f-gender-self" name="gender_self_describe"></div>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Academic program</legend>
-          <div class="grid2">
-            <div class="field"><label for="f-program">Program name <span class="req">*</span></label><input id="f-program" name="program" placeholder="e.g. MS in Applied Statistics" required></div>
-            <div class="field"><label for="f-degree">Degree level <span class="req">*</span></label>
-              <select id="f-degree" name="degree_level" required><option value="">Select…</option><option>Master's</option><option>PhD</option><option>Professional degree (MBA, JD, MD…)</option><option>Other graduate program</option></select></div>
-            <div class="field"><label for="f-school">School or college <span class="req">*</span></label>
-              <select id="f-school" name="school" required>
-                <option value="">Select…</option><option>College of Engineering</option><option>LSA (Literature, Science, and the Arts)</option><option>Ross School of Business</option><option>School of Information</option><option>School of Education</option><option>School of Public Health</option><option>Medical School</option><option>Ford School of Public Policy</option><option>Law School</option><option>Other</option>
-              </select></div>
-            <div class="field"><label for="f-grad">Expected graduation <span class="req">*</span></label><input id="f-grad" name="expected_graduation" placeholder="e.g. May 2027" required></div>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Contact</legend>
-          <div class="grid2">
-            <div class="field"><label for="f-email">U-M email <span class="req">*</span></label><input id="f-email" name="umich_email" type="email" placeholder="uniqname@umich.edu" autocomplete="email" required><span class="hint">Must end in @umich.edu</span></div>
-            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Optional"></div>
-            <div class="field"><label for="f-wechat">WeChat / other contact</label><input id="f-wechat" name="other_contact" placeholder="Optional"></div>
-            <div class="field"><label for="f-linkedin">LinkedIn or portfolio</label><input id="f-linkedin" name="linkedin" type="url" placeholder="https://… (optional)"></div>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Positions</legend>
-          <div class="field"><span class="label" id="pos-label">Which roles are you applying for? <span class="req">*</span> <span class="hint">Choose up to two</span></span>
-            <div class="checks" role="group" aria-labelledby="pos-label" id="positions">
-              <label><input type="checkbox" name="positions[]" value="Vice President"> Vice President</label>
-              <label><input type="checkbox" name="positions[]" value="General Secretary"> General Secretary</label>
-              <label><input type="checkbox" name="positions[]" value="Treasurer"> Treasurer</label>
-              <label><input type="checkbox" name="positions[]" value="Research &amp; Tech Team"> Research &amp; Tech Team</label>
-              <label><input type="checkbox" name="positions[]" value="Partnerships &amp; Outreach Team"> Partnerships &amp; Outreach Team</label>
-              <label><input type="checkbox" name="positions[]" value="Media &amp; Communications Team"> Media &amp; Communications Team</label>
-              <label><input type="checkbox" name="positions[]" value="Events &amp; Operations Team"> Events &amp; Operations Team</label>
-              <label><input type="checkbox" name="positions[]" value="HR &amp; Membership Team"> HR &amp; Membership Team</label>
-            </div>
-            <span class="err" id="pos-err" hidden>Choose at least one role.</span>
-          </div>
-          <div class="grid2">
-            <div class="field"><label for="f-first">First choice <span class="req">*</span></label><select id="f-first" name="first_choice" required><option value="">Choose from the roles you ticked…</option></select></div>
-            <div class="field"><label for="f-hours">Hours per week you can commit <span class="req">*</span></label>
-              <select id="f-hours" name="hours_per_week" required><option value="">Select…</option><option>1–3 hours</option><option>3–5 hours</option><option>5–8 hours</option><option>8+ hours</option></select></div>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Tell us about yourself</legend>
-          <div class="field"><label for="f-statement">Statement of intent <span class="req">*</span> <span class="hint">150–250 words: why you want to join and what you'd like to build</span></label>
-            <textarea id="f-statement" name="statement" rows="7" required></textarea>
-            <span class="count" id="wc" aria-live="polite">0 words</span></div>
-          <div class="field"><label for="f-exp">Relevant experience or skills</label><textarea id="f-exp" name="experience" rows="4" placeholder="Optional: projects, research, leadership, design, events, coding…"></textarea></div>
-          <div class="field"><label for="f-heard">How did you hear about us?</label>
-            <select id="f-heard" name="heard_from"><option value="">Select… (optional)</option><option>Friend or classmate</option><option>WeChat group</option><option>Instagram / LinkedIn</option><option>Email or newsletter</option><option>Maize Pages</option><option>Other</option></select></div>
-        </fieldset>
-
-        <label class="confirm"><input type="checkbox" id="f-confirm" name="confirm_enrolled" value="yes" required> I confirm I am a currently enrolled University of Michigan graduate student.</label>
-        <input type="file" name="application_pdf" id="f-pdf" accept="application/pdf" hidden>
-
-        <div class="submit-row">
-          <button type="submit" class="btn primary" id="submit-btn">Submit application</button>
-          <span class="status" id="form-status" role="status" aria-live="polite"></span>
-        </div>
-      </form>
-
-      <div class="thanks" id="thanks" hidden tabindex="-1">
-        <h3>Application received</h3>
-        <p>Thank you for applying to Global AI Alliance at Umich. We'll email you at <strong id="thanks-email"></strong> about a coffee chat. Questions in the meantime? Email any member of the founding team listed above.</p>
-      </div>
     </div>
   </section>
 </main>
@@ -542,194 +416,16 @@ footer .email-list{user-select:all;color:var(--blue);font-weight:500;font-family
 
 <script>
 // Edit these when the details are ready
-const APPLY_URL = ""; // leave empty: the application form on this page is used
+const APPLY_URL = "apply.html"; 
 
 (function(){
   const btn = document.getElementById("apply-btn");
   if (APPLY_URL) {
     btn.href = APPLY_URL; btn.target = "_blank"; btn.rel = "noopener";
     btn.removeAttribute("aria-disabled"); btn.textContent = "Open the application form →";
+  } else {
+    btn.addEventListener("click", e => e.preventDefault());
   }
-
-  // ===== Application form =====
-  const form = document.getElementById("application");
-  const $ = id => document.getElementById(id);
-  const gender = $("f-gender"), selfWrap = $("gender-self-wrap");
-  gender.addEventListener("change", () => { selfWrap.hidden = gender.value !== "Prefer to self-describe"; });
-
-  const boxes = [...form.querySelectorAll('input[name="positions[]"]')];
-  const first = $("f-first");
-  const syncFirst = () => {
-    const chosen = boxes.filter(b => b.checked).map(b => b.value);
-    const keep = first.value;
-    first.innerHTML = '<option value="">' + (chosen.length ? "Select…" : "Choose from the roles you ticked…") + '</option>' +
-      chosen.map(v => '<option>' + v.replace(/&/g,"&amp;") + '</option>').join("");
-    if (chosen.includes(keep)) first.value = keep;
-    else if (chosen.length === 1) first.value = chosen[0];
-    if (chosen.length && chosen.length <= 2) $("pos-err").hidden = true;
-  };
-  boxes.forEach(b => b.addEventListener("change", syncFirst));
-
-  const words = s => (s.trim().match(/[A-Za-z0-9'’-]+|[㐀-鿿]/g) || []).length;
-  const st = $("f-statement"), wc = $("wc");
-  const updWc = () => { const n = words(st.value); wc.textContent = n + " words" + (n < 150 ? " · aim for 150–250" : n > 250 ? " · please keep it under 250" : ""); wc.classList.toggle("ok", n >= 150 && n <= 250); };
-  st.addEventListener("input", updWc);
-
-  form.addEventListener("input", e => { if (e.target.getAttribute) e.target.removeAttribute("aria-invalid"); });
-  const status = $("form-status");
-  const setStatus = (msg, bad) => { status.textContent = msg; status.classList.toggle("bad", !!bad); };
-
-  function validate() {
-    let firstBad = null;
-    form.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
-    const mark = (el) => { el.setAttribute("aria-invalid", "true"); if (!firstBad) firstBad = el; };
-    ["f-name","f-gender","f-program","f-degree","f-school","f-grad","f-email","f-first","f-hours","f-statement"].forEach(id => { const el = $(id); if (!el.value.trim()) mark(el); });
-    const email = $("f-email");
-    if (email.value.trim() && !/^[^\s@]+@umich\.edu$/i.test(email.value.trim())) mark(email);
-    const li = $("f-linkedin"); if (li.value.trim() && !/^https?:\/\/\S+$/i.test(li.value.trim())) mark(li);
-    const nChecked = boxes.filter(b => b.checked).length;
-    if (nChecked === 0 || nChecked > 2) { $("pos-err").textContent = nChecked ? "Choose no more than two roles." : "Choose at least one role."; $("pos-err").hidden = false; if (!firstBad) firstBad = boxes[0]; }
-    const n = words(st.value); if (st.value.trim() && (n < 150 || n > 250)) mark(st);
-    if (!$("f-confirm").checked) { if (!firstBad) firstBad = $("f-confirm"); }
-    if (firstBad) {
-      firstBad.focus();
-      let msg = "Please complete the highlighted fields.";
-      if (email.getAttribute("aria-invalid") && email.value.trim()) msg = "Use your U-M email address (ending in @umich.edu).";
-      else if (st.getAttribute("aria-invalid") && st.value.trim()) msg = "Your statement should be 150–250 words (currently " + n + ").";
-      else if (!$("f-confirm").checked && firstBad === $("f-confirm")) msg = "Please confirm you are a currently enrolled U-M graduate student.";
-      setStatus(msg, true);
-      return false;
-    }
-    return true;
-  }
-
-  // Build a one-page-or-more PDF by drawing text on canvas (supports any language), then placing the pages in jsPDF
-  function buildPdf(data) {
-    const W = 1275, H = 1650, M = 110; // US Letter at 150 dpi
-    const pages = [];
-    let c, ctx, y;
-    const newPage = () => {
-      c = document.createElement("canvas"); c.width = W; c.height = H; ctx = c.getContext("2d");
-      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H); pages.push(c); y = M;
-    };
-    const font = (size, weight) => { ctx.font = (weight || 400) + " " + size + "px 'Public Sans', 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif"; };
-    const wrap = (text, maxW) => {
-      const out = [];
-      String(text).split(/\n/).forEach(par => {
-        let line = "";
-        const tokens = par.match(/[㐀-鿿＀-￯]|[^\s㐀-鿿＀-￯]+\s*|\s+/g) || [""];
-        tokens.forEach(t => {
-          const test = line + t;
-          if (ctx.measureText(test).width > maxW && line) { out.push(line.trimEnd()); line = t.trimStart(); }
-          else line = test;
-        });
-        out.push(line.trimEnd());
-      });
-      return out;
-    };
-    const ensure = h => { if (y + h > H - M) newPage(); };
-    newPage();
-    ctx.fillStyle = "#F2B705"; ctx.fillRect(M, y, 90, 10); y += 44;
-    font(44, 700); ctx.fillStyle = "#0E1A33"; ctx.fillText("Global AI Alliance at Umich", M, y); y += 46;
-    font(26, 400); ctx.fillStyle = "#4E5B74"; ctx.fillText("Fall 2026 Executive Board Application", M, y); y += 36;
-    font(20, 400); ctx.fillText("Submitted " + new Date().toLocaleString("en-US", { dateStyle: "long", timeStyle: "short" }), M, y); y += 28;
-    ctx.fillStyle = "#D8DEEA"; ctx.fillRect(M, y, W - 2*M, 2); y += 40;
-
-    const row = (label, value) => {
-      if (!value) value = "—";
-      font(19, 600); const lab = label.toUpperCase();
-      font(24, 400); const lines = wrap(value, W - 2*M - 300);
-      ensure(lines.length * 34 + 16);
-      font(18, 600); ctx.fillStyle = "#4E5B74"; ctx.fillText(lab, M, y);
-      font(24, 400); ctx.fillStyle = "#0E1A33";
-      lines.forEach((l, i) => ctx.fillText(l, M + 300, y + i * 34));
-      y += lines.length * 34 + 16;
-    };
-    const block = (title, text) => {
-      ensure(80);
-      y += 16; font(28, 700); ctx.fillStyle = "#0E1A33"; ctx.fillText(title, M, y); y += 42;
-      font(24, 400);
-      const lines = wrap(text || "—", W - 2*M);
-      lines.forEach(l => { ensure(34); ctx.fillStyle = "#0E1A33"; font(24, 400); ctx.fillText(l, M, y); y += 34; });
-      y += 10;
-    };
-    row("Full name", data.full_name);
-    row("Preferred name", data.preferred_name);
-    row("Gender", data.gender + (data.gender_self_describe ? " (" + data.gender_self_describe + ")" : ""));
-    row("Program", data.program);
-    row("Degree level", data.degree_level);
-    row("School / college", data.school);
-    row("Expected grad.", data.expected_graduation);
-    row("U-M email", data.umich_email);
-    row("Phone", data.phone);
-    row("WeChat / other", data.other_contact);
-    row("LinkedIn", data.linkedin);
-    row("Positions", data.positions.join(", "));
-    row("First choice", data.first_choice);
-    row("Hours / week", data.hours_per_week);
-    row("Heard from", data.heard_from);
-    block("Statement of intent", data.statement);
-    block("Relevant experience or skills", data.experience);
-
-    return makePdf(pages.map(pg => {
-      const bin = atob(pg.toDataURL("image/jpeg", 0.9).split(",")[1]);
-      const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-      return u;
-    }), W, H);
-  }
-
-  // Minimal PDF writer: one full-page JPEG per US Letter page
-  function makePdf(jpegs, pxW, pxH) {
-    const enc = new TextEncoder(); const parts = []; const offsets = []; let len = 0;
-    const push = d => { const b = typeof d === "string" ? enc.encode(d) : d; parts.push(b); len += b.length; };
-    const obj = (n, body) => { offsets[n] = len; push(n + " 0 obj\n"); body(); push("\nendobj\n"); };
-    push("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n");
-    const n = jpegs.length, kids = [];
-    for (let i = 0; i < n; i++) kids.push((3 + i*3) + " 0 R");
-    obj(1, () => push("<< /Type /Catalog /Pages 2 0 R >>"));
-    obj(2, () => push("<< /Type /Pages /Kids [" + kids.join(" ") + "] /Count " + n + " >>"));
-    jpegs.forEach((jpg, i) => {
-      const pg = 3 + i*3, im = pg + 1, ct = pg + 2;
-      obj(pg, () => push("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /XObject << /Im0 " + im + " 0 R >> >> /Contents " + ct + " 0 R >>"));
-      obj(im, () => { push("<< /Type /XObject /Subtype /Image /Width " + pxW + " /Height " + pxH + " /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length " + jpg.length + " >>\nstream\n"); push(jpg); push("\nendstream"); });
-      const s = "q 612 0 0 792 0 0 cm /Im0 Do Q";
-      obj(ct, () => push("<< /Length " + s.length + " >>\nstream\n" + s + "\nendstream"));
-    });
-    const total = 3 + n*3, xref = len;
-    let t = "xref\n0 " + total + "\n0000000000 65535 f \n";
-    for (let i = 1; i < total; i++) t += String(offsets[i]).padStart(10, "0") + " 00000 n \n";
-    push(t + "trailer\n<< /Size " + total + " /Root 1 0 R >>\nstartxref\n" + xref + "\n%%EOF\n");
-    return new Blob(parts, { type: "application/pdf" });
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
-    const btn = $("submit-btn");
-    btn.disabled = true; setStatus("Submitting…");
-    const fd = new FormData(form);
-    const data = Object.fromEntries([...fd.entries()].filter(([k, v]) => typeof v === "string" && k !== "positions[]"));
-    data.positions = fd.getAll("positions[]");
-    fd.set("positions", data.positions.join(", "));
-    fd.delete("positions[]");
-    try {
-      {
-        const blob = buildPdf(data);
-        const safe = ((data.full_name || "").replace(/[^A-Za-z0-9-]+/g, "_").replace(/^_+|_+$/g, "") || "applicant").slice(0, 40);
-        fd.set("application_pdf", new File([blob], "Application_" + safe + ".pdf", { type: "application/pdf" }));
-      }
-    } catch (err) { fd.delete("application_pdf"); }
-    try {
-      const res = await fetch("/", { method: "POST", body: fd });
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      form.hidden = true;
-      $("thanks-email").textContent = data.umich_email;
-      $("thanks").hidden = false; $("thanks").focus();
-    } catch (err) {
-      btn.disabled = false;
-      setStatus("We couldn't submit your application. Check your connection and try again, or email a member of the founding team.", true);
-    }
-  });
 
   // Copy contact emails for each founding member
   document.querySelectorAll(".contact-row .copy").forEach(copyBtn => {
